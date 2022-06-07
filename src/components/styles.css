@@ -1,0 +1,69 @@
+.header {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  background-color: #39445a;
+  font-family: "Montserrat", sans-serif;
+  font-size: 36px;
+  padding-bottom: 15px;
+  box-shadow: 0 1px 5px black;
+  color: white;
+  z-index: 100;
+  position: fixed;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding-top: 15px;
+    font-size: 24px;
+  }
+}
+
+/* --------- SingleTrendCard.tsx ------------ */
+
+.trending-card--bgcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 5px 0;
+  border-radius: 10px;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  background-color: #2c2f4b;
+  transition: 0.3s;
+  border: none;
+}
+
+.trending-card--bgcontainer:hover {
+  background-color: rgb(194, 225, 255);
+  color: black;
+  box-shadow: 0 0 10px white;
+}
+
+.trending-card--poster {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.trending-card--title {
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  padding: 8px 0;
+  text-overflow: hidden;
+}
+
+.trending-card--subtitle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 10px 8px;
+}
+
+@media screen and (max-width: 550px) {
+  .trending-card--bgcontainer {
+    width: 46%;
+  }
+}
