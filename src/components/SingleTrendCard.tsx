@@ -1,9 +1,9 @@
 import { Badge } from "@material-ui/core";
-import { TrendingContent } from "../config/apiContentTypes";
+import { TMDBContent } from "../config/apiContentTypes";
 import { img_300, unavailable } from "../config/posterBackgrounds";
 import "./styles.css";
 
-const SingleTrendCard = ({ data }: { data: TrendingContent }) => {
+const SingleTrendCard = ({ data }: { data: TMDBContent }) => {
   const {
     id,
     vote_average,

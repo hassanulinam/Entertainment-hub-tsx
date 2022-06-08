@@ -2,9 +2,10 @@ import Pagination from "@material-ui/lab/Pagination";
 
 type PropType = {
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  totalPages?: number;
 };
 
-export default function CustomPagination({ setPage }: PropType) {
+export default function CustomPagination({ setPage, totalPages }: PropType) {
   const handlePageChange = (page: number) => {
     setPage(Number(page));
     window.scroll(0, 0);
@@ -21,7 +22,7 @@ export default function CustomPagination({ setPage }: PropType) {
     >
       <Pagination
         onChange={(e: any) => handlePageChange(e.target.textContent)}
-        count={10}
+        count={totalPages || 10}
         shape="rounded"
         color="primary"
       />
