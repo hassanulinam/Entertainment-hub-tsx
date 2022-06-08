@@ -23,3 +23,6 @@ export const tvSeriesApi = (page?: number, genreForUrl?: string) =>
 
 export const genresApi = (type: string) =>
   `${apiDomain}/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
+
+export const searchApi = (type: string, query: string, page: number) =>
+  `${apiDomain}/search/${type}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`;

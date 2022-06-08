@@ -5,15 +5,14 @@ import "./styles.css";
 
 const SingleTrendCard = ({ data }: { data: TMDBContent }) => {
   const {
-    id,
     vote_average,
     poster_path,
     title,
     release_date,
     first_air_date,
-    media_type,
     name,
   } = data;
+
   return (
     <li className="trending-card--bgcontainer">
       <Badge
@@ -28,7 +27,7 @@ const SingleTrendCard = ({ data }: { data: TMDBContent }) => {
       <b className="trending-card--title">{title || name}</b>
 
       <div className="trending-card--subtitle">
-        <span>{media_type === "tv" ? "TV Series" : "Movie"}</span>
+        <span>{first_air_date ? "TV Series" : "Movie"}</span>
         <span>{release_date || first_air_date}</span>
       </div>
     </li>
