@@ -17,3 +17,8 @@ export type TMDBContent = {
   name?: string;
   first_air_date?: string;
 };
+
+export type GenreType = {
+  id: number;
+  name: string;
+};
