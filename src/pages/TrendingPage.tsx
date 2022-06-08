@@ -4,8 +4,8 @@ import { trendingApi } from "../config/apiUrls";
 import "../components/styles.css";
 import SingleTrendCard from "../components/SingleTrendCard";
 import { TMDBContent } from "../config/apiContentTypes";
-import "./pageStyles.css";
 import CustomPagination from "../components/CustomPagination";
+import "./pageStyles.css";
 
 const TrendingPage = () => {
   const [page, setPage] = useState(1);

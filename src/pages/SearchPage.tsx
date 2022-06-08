@@ -29,7 +29,7 @@ const SearchPage = () => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState<TMDBContent[]>([]);
   const [totalPages, setTotalPages] = useState(1);
-  const [searchText, setSearchText] = useState(" ");
+  const [searchText, setSearchText] = useState("");
 
   const fetchSearchResults = async () => {
     const URL = searchApi(tabId ? "tv" : "movie", searchText, page);
@@ -51,9 +51,9 @@ const SearchPage = () => {
         <div className="search-box-container">
           <TextField
             label="Search"
-            style={{ flex: 1 }}
+            style={{ flex: 1, maxWidth: 600 }}
             variant="filled"
-            onChange={(event: any) => setSearchText(event.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <Button
             variant="contained"
@@ -65,11 +65,12 @@ const SearchPage = () => {
         </div>
         <Tabs
           value={tabId}
-          onChange={(e: any, newValue: number) => {
+          centered
+          onChange={(_, newValue) => {
             setTabId(newValue);
             setPage(1);
           }}
-          style={{ paddingBottom: 5, width: "100" }}
+          style={{ paddingBottom: 5, margin: "0 auto" }}
           indicatorColor="primary"
           textColor="primary"
           aria-label="disabled tabs example"
@@ -83,9 +84,11 @@ const SearchPage = () => {
           <SingleTrendCard key={t.id} data={t} />
         ))}
       </ul>
-      {searchText &&
-        content.length == 0 &&
-        (tabId ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)}
+      {searchText && content.length === 0 && (
+        <div className="trending-page--cards-list">
+          {tabId ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>}
+        </div>
+      )}
       {totalPages > 1 && (
         <CustomPagination setPage={setPage} totalPages={totalPages} />
       )}

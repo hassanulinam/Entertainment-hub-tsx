@@ -1,5 +1,3 @@
-import { GenreType } from "./apiContentTypes";
-
 export const apiDomain = "https://api.themoviedb.org/3";
 
 export const trendingApi = (page?: number) =>
@@ -26,3 +24,9 @@ export const genresApi = (type: string) =>
 
 export const searchApi = (type: string, query: string, page: number) =>
   `${apiDomain}/search/${type}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`;
+
+export const modalContentApi = (media_type: string, id: number) =>
+  `${apiDomain}/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
+
+export const videoDataApi = (media_type: string, id: number) =>
+  `${apiDomain}/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
