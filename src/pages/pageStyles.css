@@ -6,6 +6,10 @@
   justify-content: space-around;
 }
 
+.trending-page--cards-list > li {
+  display: flex;
+}
+
 .search-box-container {
   width: 100%;
   display: flex;
