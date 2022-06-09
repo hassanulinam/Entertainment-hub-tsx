@@ -17,7 +17,7 @@ const TvseriesPage = () => {
 
   const fetchMoviesData = async () => {
     const URL = tvSeriesApi(page, genresForUrl);
-    console.log("Fetching TV data...", URL);
+    console.log("Fetching TV data...");
     const { data } = await axios.get(URL);
     setContent(data.results);
     setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);

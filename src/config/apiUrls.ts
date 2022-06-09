@@ -30,3 +30,6 @@ export const modalContentApi = (media_type: string, id: number) =>
 
 export const videoDataApi = (media_type: string, id: number) =>
   `${apiDomain}/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
+
+export const creditsApi = (media_type: string, id: number) =>
+  `${apiDomain}/${media_type}/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
