@@ -17,7 +17,7 @@ const MoviesPage = () => {
 
   const fetchMoviesData = async () => {
     const URL = moviesApi(page, genresForUrl);
-    console.log("Fetching Movies data...", URL);
+    console.log("Fetching Movies data...");
     const { data } = await axios.get(URL);
     setContent(data.results);
     setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);

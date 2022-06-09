@@ -14,6 +14,7 @@ import { Button } from "@material-ui/core";
 import { YouTube } from "@material-ui/icons";
 
 import "./styles.css";
+import ModalGalleryCarousel from "./ModalGalleryCarousel";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
@@ -31,6 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[5],
       padding: theme.spacing(1, 1, 3),
     },
+    emptyPaper: {
+      backgroundColor: "#39445a",
+      border: "1px solid #282c34",
+      borderRadius: 10,
+      boxShadow: theme.shadows[5],
+      textAlign: "center",
+      padding: "10%",
+      fontSize: "5vw",
+      color: "tomato",
+    },
   })
 );
 
@@ -40,25 +51,38 @@ export default function ContentModal({ children, media_type, id }: PropType) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [ytTrailerKey, setYtTrailerKey] = useState("");
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(undefined);
   const fadeRef = useRef(null);
   const modalRef = useRef(null);
   const wrapperRef = useRef(null);
 
   const fetchData = async () => {
-    const URL = modalContentApi(media_type, id);
-    const { data } = await axios.get(URL);
-    setContent(data);
+    try {
+      console.log("Fetching content for MODAL");
+      const URL = modalContentApi(media_type, id);
+      const { data } = await axios.get(URL);
+      setContent(data);
+    } catch (err: any) {
+      console.log(err.message, " While fetching ", id);
+      setContent(undefined);
+    }
   };
 
   const fetchVideo = async () => {
-    const URL = videoDataApi(media_type, id);
-    const { data } = await axios.get(URL);
-    setYtTrailerKey(data.results[0]?.key);
+    try {
+      const URL = videoDataApi(media_type, id);
+      const { data } = await axios.get(URL);
+      setYtTrailerKey(data.results[0]?.key);
+      console.log("Trailers Data", URL, data);
+    } catch (err: any) {
+      console.log(err.message);
+      setYtTrailerKey("");
+    }
   };
 
   const handleOpen = () => {
     setOpen(true);
+    console.log("YOUTUBE KEY: ", ytTrailerKey);
   };
 
   const handleClose = () => {
@@ -68,6 +92,10 @@ export default function ContentModal({ children, media_type, id }: PropType) {
   useEffect(() => {
     fetchData();
     fetchVideo();
+    return () => {
+      setContent(undefined);
+      setYtTrailerKey("");
+    };
   }, []);
 
   return (
@@ -93,7 +121,7 @@ export default function ContentModal({ children, media_type, id }: PropType) {
         ref={modalRef}
       >
         <Fade in={open} ref={fadeRef}>
-          {content && (
+          {content ? (
             <div className={classes.paper}>
               <div className="modal-content--wrapper">
                 <img
@@ -130,17 +158,28 @@ export default function ContentModal({ children, media_type, id }: PropType) {
                   <span className="modal-content--description">
                     {content.overview}
                   </span>
-                  <div className="modal-content--carousel-wrapper"></div>
+                  <div className="modal-content--carousel-wrapper">
+                    <ModalGalleryCarousel media_type={media_type} id={id} />
+                  </div>
                   <Button
                     variant="contained"
                     startIcon={<YouTube />}
                     color="secondary"
                     target="_blank"
                     href={`https://www.youtube.com/watch?v=${ytTrailerKey}`}
+                    disabled={!ytTrailerKey}
                   >
-                    Watch the Trailer
+                    {ytTrailerKey
+                      ? "Watch the Trailer"
+                      : "Trailer not available"}
                   </Button>
                 </div>
+              </div>
+            </div>
+          ) : (
+            <div className={classes.emptyPaper}>
+              <div className="modal-content--wrapper">
+                <b className="modal-content--not-found">Data Not Available</b>
               </div>
             </div>
           )}
