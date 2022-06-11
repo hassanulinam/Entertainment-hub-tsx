@@ -32,6 +32,7 @@ const SearchPage = () => {
   const [searchText, setSearchText] = useState("");
 
   const fetchSearchResults = async () => {
+    if (searchText.length === 0) return;
     const URL = searchApi(tabId ? "tv" : "movie", searchText, page);
     console.log("Fetching search results: " + URL);
     const { data } = await axios.get(URL);
