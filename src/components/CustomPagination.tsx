@@ -37,6 +37,8 @@ export default function CustomPagination({ setPage, totalPages }: PropType) {
           shape="rounded"
           variant="outlined"
           color="primary"
+          hidePrevButton
+          hideNextButton
         />
       </div>
     </ThemeProvider>
